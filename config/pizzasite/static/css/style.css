@@ -1,3 +1,28 @@
-body {
-  background-color: #35e649;
+header {
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 30px;
+}
+
+
+header .left {
+  display: flex;
+  color: white;
+}
+
+header .right {
+  display: flex; 
+  color: white;
+}
+
+.left *, .right * {
+  margin: 5px;
+  text-decoration: none;
+  color: black;
+}
+
+.col-4 {
+  text-align: center;
 }
