@@ -25,4 +25,33 @@ header .right {
 
 .col-4 {
   text-align: center;
+  margin: 20px 0;
 }
+
+.ingridients {
+  height: 150px;
+  display: flex;
+  align-items: end;
+  color: #878787;
+}
+
+.radius {
+  display: flex;
+}
+
+.skirting {
+  display: flex;
+}
+
+.txt-radius {
+  width: 25%;  
+}
+
+.txt-skirting {
+  width: 25%;  
+}
+
+select {
+  width: 75%;  
+}
+

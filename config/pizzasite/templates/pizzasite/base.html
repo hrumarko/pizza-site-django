@@ -38,24 +38,41 @@
     <div class="row">
       {% for o in objs%}
       <div class="col-4">
-      
-        
-          <div class="card-header py-3">
             <h4 class="my-0 fw-normal">{{ o.name }}</h4>
-          </div>
           <img src="{{o.image.url}}" alt="">
-          <!-- <img src="{% static 'img/burger.png' %}" alt="fdkfd"> -->
-          <div class="card-body">
-            <h1 class="card-title pricing-card-title">{{ o.price }} $</h1>
-            <ul class="list-unstyled mt-3 mb-4">
-              
-              {% for i in o.ingridients.all %}
-              {{ i }}
+          
+          <div class="radius">
+            <br>
+            <div class="txt-radius">
+              Radius, cm
+            </div>
+            <select>
+              {% for r in o.radius.all %}
+              <option value="1">{{r}}</option>
               {% endfor %}
-            </ul>
-            <button type="button" class="w-100 btn btn-lg btn-outline-primary">Add to cart</button>
+            </select>
           </div>
-        
+          
+          <div class="skirting">
+            <br>
+            <div class="txt-skirting">
+              Skirting
+            </div>
+            <select>
+              {% for s in o.dough.all %}
+              <option value="1">{{s}}</option>
+              {% endfor %}
+            </select>
+          </div>
+          
+            <h1 class="card-title pricing-card-title">{{ o.price }} $</h1>
+            
+              <div class="ingridients">
+                {% for i in o.ingridients.all %}
+                {{ i }}, 
+                {% endfor %}
+              </div>
+            <button type="button" class="w-100 btn btn-lg btn-outline-primary">Add to cart</button>
       </div>
       {% endfor %}
     </div>
