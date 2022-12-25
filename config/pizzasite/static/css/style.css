@@ -6,18 +6,18 @@ header {
   font-size: 30px;
 }
 
-
 header .left {
   display: flex;
   color: white;
 }
 
 header .right {
-  display: flex; 
+  display: flex;
   color: white;
 }
 
-.left *, .right * {
+.left *,
+.right * {
   margin: 5px;
   text-decoration: none;
   color: black;
@@ -44,14 +44,13 @@ header .right {
 }
 
 .txt-radius {
-  width: 25%;  
+  width: 25%;
 }
 
 .txt-skirting {
-  width: 25%;  
+  width: 25%;
 }
 
 select {
-  width: 75%;  
+  width: 75%;
 }
-
