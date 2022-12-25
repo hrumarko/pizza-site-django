@@ -1,0 +1,10 @@
+{% extends 'register/base.html' %}
+{% block content %}
+<div class="users">
+  {% for u in users %}
+  <p>
+  {{ u.name }} - {{u.email}}
+  </p>
+  {% endfor %}
+</div>
+{% endblock content %}

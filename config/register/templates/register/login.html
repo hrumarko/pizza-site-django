@@ -1,0 +1,17 @@
+{% extends 'pizzasite/base.html' %}
+{% load static %}
+{% block import %}
+<link href="{% static 'css/register/style.css' %}" rel="stylesheet">
+{% endblock import %}
+{% block content %}
+    <h1>Login</h1>
+    <div class="place-login-form">
+        <div class="login-form">
+        <form method="post">
+            {% csrf_token %}
+            {{form.as_p}}
+            <button class="login-button" type="submit">Login</button>
+        </form>
+        </div> 
+    </div>
+{% endblock content %}

@@ -1,0 +1,67 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0 250px;
+}
+
+header {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 30px;
+  height: 45px;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+
+.login-form, .register-form {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  width: 900px;
+  font-size: 40px;
+}
+
+.login-form p {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.register-form p {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.login-username, .login-password {
+  font-size: 40px;
+  border-radius: 15px;
+}
+
+.login-button {
+  border-radius: 15px;
+  font-size: 40px;
+  width: 100%;
+  color: white;
+  background-color: #49be25;
+}
+
+.register-field {
+  width: 50%;
+  border-radius: 15px;
+  font-size: 30px;
+}
+
+.users {
+  width: 700px;
+  margin-right: auto;
+  margin-left: auto;
+  font-size: 30px;
+
+}
