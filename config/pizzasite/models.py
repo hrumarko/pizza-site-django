@@ -1,31 +1,60 @@
 from django.db import models
+from config.settings import AUTH_USER_MODEL as User
 
 
 class Pizza(models.Model):
+    name = models.CharField(max_length=50)
+    price = models.ManyToManyField('Price')
+    default_price = models.IntegerField()  # equals price for 30cm pizza
     image = models.ImageField(upload_to="photos/")
-    name = models.CharField(max_length=20)
-    radius = models.ManyToManyField('Radius')
     dough = models.ManyToManyField('Dough')
-    price = models.DecimalField(decimal_places=0, max_digits=2)
-    ingridients = models.ManyToManyField('Ingridients')
-
-
-class Radius(models.Model):
-    size = models.SmallIntegerField()
-
-    def __str__(self):
-        return str(self.size)
-
-
-class Dough(models.Model):
-    type = models.CharField(max_length=20)
-
-    def __str__(self):
-        return self.type
-
-
-class Ingridients(models.Model):
-    name = models.CharField(max_length=20, unique=True)
 
     def __str__(self):
         return self.name
+
+
+class Price(models.Model):
+    name_of_pizza = models.CharField(max_length=50)
+    radius = models.IntegerField()
+    price = models.IntegerField()
+    
+    class Meta:
+        ordering = ['name_of_pizza', 'radius']
+    
+    def __str__(self):
+        return f'{self.name_of_pizza} - {self.radius} = {self.price}'
+    
+
+class Dough(models.Model):
+    name = models.CharField(max_length=50)
+    additional_payment = models.IntegerField()
+
+    def __str__(self):
+        return f'{self.name}'
+
+
+class Cart(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    pizza = models.CharField(max_length=255)
+    radius = models.CharField(max_length=255)
+    dough = models.CharField(max_length=255)
+    count = models.IntegerField()
+    price = models.CharField(max_length=255)
+    img = models.ImageField()
+    main_price = models.CharField(max_length=255)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    

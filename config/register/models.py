@@ -36,6 +36,7 @@ class MyUser(AbstractBaseUser):
     name = models.CharField(max_length=20)
     email = models.EmailField(max_length=255, unique=True)
     number = models.CharField(max_length=10, unique=True)
+    cart_price = models.CharField(max_length=100)
     is_admin = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     

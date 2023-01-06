@@ -31,65 +31,146 @@
               {{ user.name }}
             </div>
             <div class='cart'>
-                <a href="#">Cart(0)</a>
-                <a href="{% url 'logout' %}"> Logout </a>
+              <button class="open-cart" >Cart</button>
             </div>
+                <a href="{% url 'logout' %}"> Logout </a>
               {% else %}
             <div class='account'>
               <a href="{% url 'login' %}">Login </a> | <a href="{% url 'register' %}">Register</a>
             </div>
             <div class='cart'>
-              <a href="#">Cart</a>
+              <button class="open-cart">Cart</button>
             </div>
               {% endif %}
         </div>
   </header>   
   <hr>
+
+  
+  <div class="cart-popup disactive">
+    
+    <div class="cart-window">
+      <div class="cart-top">
+        <h1 class='cart-h1'>Cart</h1>
+        <button class="cart-close-btn">X</button>
+      </div>
+      
+        {% csrf_token %}
+        <div class="myrow">
+          
+          
+          <div class="mycol-6 hide">
+            
+            <div class="cart-case">
+                <div class="cart-image">
+                  <img src="" class="cart-img">
+                </div>
+                <div class="cart-case-description">
+                  <h1 class="cart-name"></h1>
+                  <p class="cart-radius"></p>
+                  <p class="cart-dough"></p>
+                </div>
+               <div class="final">
+                 <h1 class="cart-price">0 </h1>
+                 <div class="cart-choose-count">
+                   <button class="cart-ch-cnt-btn btn-incr"  type="">-</button>
+                   <p class="cart-count">1</p>
+                   <button class="cart-ch-cnt-btn btn-decr" type="">+</button>
+                   <p class="cart-main-price hide" ></p>
+                 </div>
+               </div>
+                 <button class="cart-delete" type="">X</button>
+            </div>
+          </div>
+          
+          {% if user.is_authenticated %}
+            {% for case in cart %}
+              <div class="mycol-6">
+                
+                <div class="cart-case">
+                    <div class="cart-image">
+                      <img src="{{ case.img }}" class="cart-img">
+                    </div>
+                    <div class="cart-case-description">
+                      <h1 class="cart-name">{{ case.pizza }}</h1>
+                      <p class="cart-radius">{{ case.radius }}</p>
+                      <p class="cart-dough">{{ case.dough}}</p>
+                    </div>
+                   <div class="final">
+                     <h1 class="cart-price">{{ case.price }}</h1>
+                     <div class="cart-choose-count">
+                       <button class="cart-ch-cnt-btn btn-incr"  type="">-</button>
+                       <p class="cart-count">{{ case.count }}</p>
+                       <button class="cart-ch-cnt-btn btn-decr" type="">+</button>
+                       <p class="cart-main-price hide" >{{ case.main_price }}</p>
+                     </div>
+                   </div>
+                     <button class="cart-delete" type="">X</button>
+                </div>
+              </div>
+              {% endfor %}
+              {% endif %}
+          
+          
+        </div> <!-- end row -->
+      
+      <hr style="color:white;">
+      <div class="buy">
+        <h1  class='main-amount'>{{ user.cart_price }}</h1>
+        <button type="">Вернуться к покупкам</button>
+        <button class="buy-btn">Купить</button>
+        
+      </div>
+      
+      
+    </div>
+    <div class="cart-bg"></div>
+  </div>
+
+
+  
   {% block content %}
   <div class="cases">
     <div class="row">
-      {% for o in objs%}
-      <div class="col-4">
-        <form method="post">
-          {% csrf_token %}
-            <h4 class="my-0 fw-normal">{{ o.name }}</h4>
-          <img src="{{o.image.url}}" alt="">
-          <div class="radius">
-            <br>
-            <div class="txt-radius">
-              Radius, cm
-            </div>
-            <select>
-              {% for r in o.radius.all %}
-              <option value="1">{{r}}</option>
-              {% endfor %}
-            </select>
+      {% for pizza in pizzas %}
+          <div class="col-4">
+            <form onsubmit="return false;">
+              {% csrf_token %}
+              <h4 class="my-0 fw-normal">{{pizza.name}}</h4>
+              <img src="{{ pizza.image.url }}" class="img-pizza">
+              <div class="radius">
+                  <div class="options-radius">
+                    {% for radius in pizza.price.all %}
+                    <button class="btn-radius" type="button" data-price="{{radius.price}}">{{radius.radius}}cm</button>
+                    {% endfor %}
+                  </div>
+              </div>
+                <div class="dough">
+                  <select class='doughs'>
+                    {% for dough in pizza.dough.all %}
+                      {% if dough.name == "с бортиком" %}
+                        <option selected="selected" value="{{dough.additional_payment}}">{{ dough.name}}</option>
+                      {% else %}
+                      <option value="{{dough.additional_payment}}">{{ dough.name}}</option>
+                      {% endif %}
+                    {% endfor %}
+                  </select>
+                </div>
+                <h1 class="card-title pricing-card-title">{{ pizza.default_price }} ₴</h1>
+                  <div class="ingridients">
+                    salfk afslk afsdf lkjj
+                   </div>
+                   <input type="hidden" name="pizza_pk" value="{{o.pk}}">
+                <button  class="w-100 btn btn-lg btn-outline-primary">Add to cart</button>
+            </form>
           </div>
-          <div class="skirting">
-            <br>
-            <div class="txt-skirting">
-              Skirting
-            </div>
-            <select>
-              {% for s in o.dough.all %}
-              <option value="1">{{s}}</option>
-              {% endfor %}
-            </select>
-          </div>
-            <h1 class="card-title pricing-card-title">{{ o.price }} $</h1>
-              <div class="ingridients">
-                {% for i in o.ingridients.all %}
-                {{ i }}, 
-                {% endfor %}
-               </div>
-            <button type="submit" class="w-100 btn btn-lg btn-outline-primary">Add to cart</button>
-        </form>
-      </div>
-      {% endfor %}
+        {% endfor %}
     </div>
   </div>
   {% endblock content %}
-    <script src = "{% static 'js/test.js'%}"></script>  
+  {% csrf_token %}
+<script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+    <script src = "{% static 'js/script.js'%}"></script>  
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
   </body>
 </html>
