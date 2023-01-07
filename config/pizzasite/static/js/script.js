@@ -1,3 +1,14 @@
+
+let user = $(".auth").text();
+let is_auth;
+if(user == "True"){
+  is_auth = true;
+}else{
+  is_auth = false;
+}
+console.log(is_auth);
+
+
 let cards = document.querySelectorAll(".col-4");
 let main_amount = parseInt( $('.main-amount').text().split(" ")[0] );
 let open_cart = document.querySelector(".open-cart");

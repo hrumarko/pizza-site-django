@@ -34,7 +34,8 @@ class Dough(models.Model):
 
 
 class Cart(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    session_id = models.CharField(max_length=255, blank=True)
     pizza = models.CharField(max_length=255)
     radius = models.CharField(max_length=255)
     dough = models.CharField(max_length=255)
@@ -44,6 +45,9 @@ class Cart(models.Model):
     main_price = models.CharField(max_length=255)
 
 
+class SessionUser(models.Model):
+    session_id = models.CharField(max_length=255, unique=True)
+    price = models.CharField(max_length=255)
 
 
 

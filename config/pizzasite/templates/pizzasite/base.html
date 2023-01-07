@@ -26,7 +26,9 @@
             </div>
         </div>
         <div class="right">
+          <h1 class="auth">{{ request.user.is_authenticated }}</h1>
             {% if request.user.is_authenticated %}
+            
             <div class='account'>
               {{ user.name }}
             </div>
@@ -83,7 +85,6 @@
             </div>
           </div>
           
-          {% if user.is_authenticated %}
             {% for case in cart %}
               <div class="mycol-6">
                 
@@ -109,14 +110,17 @@
                 </div>
               </div>
               {% endfor %}
-              {% endif %}
           
           
         </div> <!-- end row -->
       
       <hr style="color:white;">
       <div class="buy">
-        <h1  class='main-amount'>{{ user.cart_price }}</h1>
+        {% if user.is_authenticated %}
+            <h1  class='main-amount'>{{ user.cart_price }}</h1>
+        {% else %}
+        <h1  class='main-amount'>{{ses_user.price}}</h1>
+        {% endif %}
         <button type="">Вернуться к покупкам</button>
         <button class="buy-btn">Купить</button>
         
