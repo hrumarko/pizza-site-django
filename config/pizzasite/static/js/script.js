@@ -1,3 +1,13 @@
+const myRe = /^095|066|097|063|093|096|098|068|067|050|099|073\d{7}/g;
+const myArray = myRe.exec('0925368362');
+if (myArray == null){
+  console.log("nulll");
+} else {
+  console.log('true')
+}
+
+
+
 
 let user = $(".auth").text();
 let is_auth;
@@ -129,6 +139,10 @@ $('.buy-btn').click(function(){
   var dct = {
   }
 
+  var delivery = {
+    
+  }
+
   let c = Array.from(document.querySelector('.myrow').children)
   c.forEach(function(card){
     if (card.classList == 'mycol-6'){
@@ -150,19 +164,35 @@ $('.buy-btn').click(function(){
     }
   })
   mp = document.querySelector('.main-amount').textContent;
-  dct['main_price'] = mp;
-  let order = JSON.stringify(dct);
+  delivery['main_price'] = mp;
+  name = document.querySelector('.delivery-name').value;
+  number = document.querySelector('.delivery-number').value;
+  address = document.querySelector('.delivery-address').value;
+  commentary = document.querySelector('.delivery-commentary').value;
+  delivery['name'] = name
+  delivery['number'] = number
+  delivery['address'] = address
+  delivery['commentary'] = commentary
 
-  $.post("res/",
-    {
-      "csrfmiddlewaretoken": getCookie("csrftoken"),
-      order,
-    },
-    
-    console.log(order)
-    );
-  i = 0;
-  // window.location.replace("order/");
+  
+  const re_number = myRe.exec(number);
+  if (re_number == null){
+    alert("Введите корретный номер, пример 0660000000")
+  } else {
+    let order = JSON.stringify(dct);
+    let json_delivery = JSON.stringify(delivery)
+    $.post("order/",
+      {
+        "csrfmiddlewaretoken": getCookie("csrftoken"),
+        order,
+        json_delivery,
+      },
+      
+      console.log(order, json_delivery)
+      );
+    i = 0;
+    // window.location.replace("/result-order/");
+  }
 })
 
 open_cart.addEventListener("click", function () {

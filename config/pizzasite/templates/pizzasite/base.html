@@ -58,6 +58,7 @@
       </div>
       
         {% csrf_token %}
+        <div class="pizzanform">
         <div class="myrow">
           
           
@@ -114,6 +115,14 @@
           
         </div> <!-- end row -->
       
+      <div class="delivery-form">
+        <h1 style='color: white; text-align:center;'>Доставка</h1>
+        {% for field in delivery_form %}
+        {{field}}
+        <br>
+        {% endfor %}
+      </div>
+      </div>
       <hr style="color:white;">
       <div class="buy">
         {% if user.is_authenticated %}
@@ -171,6 +180,7 @@
         {% endfor %}
     </div>
   </div>
+  <hr>
   {% endblock content %}
   {% csrf_token %}
 <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>

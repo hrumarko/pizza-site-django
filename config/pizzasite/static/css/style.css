@@ -151,15 +151,19 @@ select {
   align-items: center;
   justify-content: space-between;
 }
+.pizzanform{
+  display:flex;
+}
 
 .myrow {
-  width: 100%;
+  width: 60%;
   height:555px;
   justify-content: space-between;
   overflow: auto;
-  display: grid;
-  grid-template-columns: 50% 50%;
+  /* display: grid; */
+  /* grid-template-columns: 50% 50%; */
 }
+
 
 .mycol-6{
   position: relative;
@@ -254,4 +258,14 @@ select {
 
 .auth {
   display: none;
+}
+
+.delivery-form {
+  width:40%;
+}
+.delivery-form * {
+  width: 95%;
+  font-size:30px;
+  border-radius: 5px;
+  margin: 5px;
 }

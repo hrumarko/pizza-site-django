@@ -1,1 +1,25 @@
 {% extends 'pizzasite/base.html' %}
+{% block content %}
+{% for i in orders %}
+    <form action="" method="POST">
+        {% csrf_token %}
+        <h1>Заказ {{i.id }}</h1>
+        <h3 style='color:blue'>{{ i.price }}</h3>
+        Номер - {{ i.number }}<br>
+        Имя - {{ i.name }}<br>
+        Адресс - {{ i.address }}<br>
+        Комментарий - {{ i.commentary }}<br>
+        <br>
+            {% for a in i.order.values %}
+            {{ a.name }}
+            {{ a.count }}
+            {{ a.dough }}
+            {{ a.radius}}
+            <h4>{{ a.price }}</h4>
+            {% endfor %}
+        <br>
+        <button type="submit">Отправлен</button>
+        <hr><input type="hidden" name="order_id" value="{{i.id}}">
+    </form>
+{% endfor %}
+{% endblock content %}
