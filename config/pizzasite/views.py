@@ -39,15 +39,6 @@ def index(request):
     return render(request, 'pizzasite/base.html', ctx)
 
 
-def res(request):
-    b = request.POST
-    j = json.loads(b['order'])
-    print(j)
-    
-    
-    # print(b['order'['pizza0']['name']])
-    return redirect('home')
-
 
 def add_case_in_cart(request):
     req = request.POST

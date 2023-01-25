@@ -28,6 +28,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'pizzasite',
     'register',
+    'rest_framework',
+    'api',
 ]
 
 MIDDLEWARE = [
